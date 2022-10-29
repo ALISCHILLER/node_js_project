@@ -1,4 +1,4 @@
-const note = require('./notes');
+const notes = require('./notes');
 const _ = require('lodash');
 
 const yargs = require('yargs');
@@ -18,12 +18,23 @@ var commamnd = process.argv[2];
 console.log('commamnd :', commamnd);
 console.log('Yargs :', argv);
 
-
 if (commamnd === 'add') {
-    note.addNote(argv.title,argv.body)
+   var note=notes.addNote(argv.title, argv.body)
+    if (note) {
+        console.log('Note Created!');
+        console.log('------')
+        console.log('Title ${note.title}')
+        console.log('Body ${note.body}')
+    } else {
+        console.log('Note title taken .')
+    }
 } else if (commamnd === 'list') {
     console.log('لیست نمایش بده');
-} else if(command==='remove') {
+} else if (command === 'remove') {
+
+    var noteRemoved = notes.removeNote(argv.title)
+    var message = noteRemoved ? 'Note was removed ' : 'Note not found'
+    console.log(message)
     
 }else {
      console.log('ارگومانی وارد نشده است');
