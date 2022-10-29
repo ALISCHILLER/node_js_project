@@ -2,11 +2,11 @@ const notes = require('./notes');
 const _ = require('lodash');
 
 const yargs = require('yargs');
-console.log(note.age)
 
-console.log(_.isString(true)); //boolean == string ->fals
-console.log(_.isString('masood salahi'));//string == string -> true
-console.log(_.uniq([1, 2, 4, 5, 6, 2]));
+
+// console.log(_.isString(true)); //boolean == string ->fals
+// console.log(_.isString('masood salahi'));//string == string -> true
+// console.log(_.uniq([1, 2, 4, 5, 6, 2]));
 
 //console.log(process.argv);
 var argv = yargs.argv;
@@ -22,15 +22,22 @@ if (commamnd === 'add') {
    var note=notes.addNote(argv.title, argv.body)
     if (note) {
         console.log('Note Created!');
-        console.log('------')
-        console.log('Title ${note.title}')
-        console.log('Body ${note.body}')
+       notes.logNotes(note)
     } else {
         console.log('Note title taken .')
     }
 } else if (commamnd === 'list') {
     console.log('لیست نمایش بده');
-} else if (command === 'remove') {
+    notes.getNotes()
+} else if (commamnd === 'read') {
+    var note = notes.getNote(argv.title)
+    if (note) {
+        console.log('Note was Found!')
+        notes.logNotes(note)
+    } else {
+        console.log('Note not found')
+    }
+}else if (command === 'remove') {
 
     var noteRemoved = notes.removeNote(argv.title)
     var message = noteRemoved ? 'Note was removed ' : 'Note not found'
