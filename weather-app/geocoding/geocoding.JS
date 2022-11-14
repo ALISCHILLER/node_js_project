@@ -20,8 +20,8 @@ var geocodingCity=(city,callback)=>{
            }else{
            callback(undefined, {
             name: body[0].name,
-            latitude:  body[0].latitude,
-            latitude:  body[0].latitude,
+            Latitude:  body[0].latitude,
+            Longitude:  body[0].longitude,
             country:  body[0].country,
             stat:  body[0].stat
           })

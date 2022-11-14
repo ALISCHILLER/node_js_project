@@ -10,7 +10,7 @@ var getweather =(lat,lon,callback) =>{
         }else if(response.statusCode != 200){
            callback('Error:'+response.statusCode+ body.toString('utf8'))
         }else{
-            callback(undefined,body);
+            callback(undefined,body.main);
         }
       
     })

@@ -20,7 +20,7 @@ const argv=yargs
     }else{
         console.log(JSON.stringify(results,undefined,2));
 
-        weather.getweather(44.34,10.99,(errorMsg,weatherResults)=>{
+        weather.getweather(results.Latitude,results.Longitude,(errorMsg,weatherResults)=>{
             if(errorMsg){
                 console.error(errorMsg)
             }else{
