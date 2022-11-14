@@ -1,6 +1,6 @@
-const request = require('request');
 const yargs=require('yargs')
 const geocoding=require('./geocoding/geocoding')
+const weather=require('./weather/wheather')
 const argv=yargs
 .options({
     a:{
@@ -19,7 +19,17 @@ const argv=yargs
         console.error(errorMsg)
     }else{
         console.log(JSON.stringify(results,undefined,2));
+
+        weather.getweather(44.34,10.99,(errorMsg,weatherResults)=>{
+            if(errorMsg){
+                console.error(errorMsg)
+            }else{
+                console.log(JSON.stringify(weatherResults,undefined,2));
+            }
+         });
+         
     }
  });
+
 
 
