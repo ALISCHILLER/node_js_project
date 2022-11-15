@@ -15,8 +15,4 @@ var getweather =(lat,lon,callback) =>{
       
     })
 }
-
-
-
-
 module.exports.getweather=getweather
