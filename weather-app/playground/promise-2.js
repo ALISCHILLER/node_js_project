@@ -2,7 +2,7 @@
 const request =require('request');
 var geocode =(address) =>{
     return new Promise((resolve ,reject) => {
-        var encodeCity= encodeURIComponent(city)
+        var encodeCity= encodeURIComponent(address)
         request({
             url: 'https://api.api-ninjas.com/v1/geocoding?city=' + encodeCity,
             json:true ,
