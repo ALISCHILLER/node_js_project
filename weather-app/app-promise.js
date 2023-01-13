@@ -1,7 +1,6 @@
 const yargs=require('yargs')
 const axios=require('axios')
-const geocoding=require('./geocoding/geocoding')
-const weather=require('./weather/wheather')
+
 const argv=yargs
 .options({
     a:{
@@ -26,12 +25,17 @@ const argv=yargs
         console.log(response.data[0], undefined , 2)
         var lat=response.data[0].latitude;
         var lon=response.data[0].longitude;
-        weatherurl:`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=70c9ebc530f9b427972bf63416ab1718`;
+       var weatherurl=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=70c9ebc530f9b427972bf63416ab1718`;
         return axios.get(weatherurl);
      }
   
- }).then(()=>{
-
+ }).then((response)=>{
+   
+    if(response.status != 200){
+        return console.error('Error:', response.status, response);
+     } else if(response.status === 200){
+        console.log(response.data.main)
+     }
  }).catch((errorMsg)=>{
     console.log(errorMsg)
  })
