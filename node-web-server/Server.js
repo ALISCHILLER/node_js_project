@@ -1,6 +1,6 @@
 const express=require('express');
 const hbs=require('hbs');
-
+const fs=require('fs');
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/Partials')
@@ -10,8 +10,28 @@ app.set('view engie','hbs');
 
 
 
+//Middleware log time 
+app.use((req,res,next)=>{
+  var now=new Date();
+  var log=` ${now}: ${req.method} ${req.url}`
+  console.log(log)
+  fs.appendFileSync('server.log',log + '\n')
 
+  next();
+})
 
+//Middleware error site
+// app.use((req,res,next)=>{
+//   res.render('offline.hbs')
+// })
+
+hbs.registerHelper('getCurrentYear',()=>{
+  return new Date().getFullYear()
+})
+
+hbs.registerHelper('upperCase', (text)=>{
+  return text.toUpperCase();
+})
 //GeT POST PUT PATCH DELETE -------------->Http Request
 //http://www.google.ir/vuejs --->Get Request
 // app.get('/',(req,res)=>{
@@ -32,13 +52,12 @@ app.set('view engie','hbs');
 app.get('/',(req,res)=>{
   res.render('home.hbs',{
     pageTitle:'صفحه اصلی',
-    currentYear:new Date().getFullYear()
+    WelcomeMessage:'welcome to Site '
   })
 })
 app.get('/about',(req,res)=>{
     res.render('about.hbs', {
-      pageTitle:'درباره ما 2',
-      currentYear:new Date().getFullYear()
+      pageTitle:'درباره ما 2'
     })
 })
 app.listen(3000, () =>{
